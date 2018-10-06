@@ -16,5 +16,10 @@ pipeline {
                 sh 'mvn package' 
             }
         }
+        stage('Publish') {
+            steps {
+                nexusPublisher nexusInstanceId: 'localNexuw', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/petclinic/target/spring-petclinic-2.0.0.BUILD-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'petclinic-jar', groupId: 'petclinic', packaging: 'foo', version: '2l0']]]
+            }
+        }
     }
 }
